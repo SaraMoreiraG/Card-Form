@@ -1,0 +1,11 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+.header,
+.footer{
+    background-color: whitesmoke;
+}
+.cards{
+    background-color: lightgrey;
+}
