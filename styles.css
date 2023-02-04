@@ -6,46 +6,45 @@ body{
 .footer{
     background-color: whitesmoke;
 }
-/*.cards{
-    background-color: lightgrey;
-}*/
-.form span{
-    color: red;
-}
-.input-group span{
-    color: black;
-}
 #submitError{
     display: none;
 }
-/*form i{
+/*.input-group span{
+    color: black;
+}*/
+
+form i.fas{
     visibility: hidden;
     position: absolute;
     margin-top: 5px;
-}*/
+}
 form small{
     visibility: hidden;
     color: #e73c3c;
 }
-select{
-    border-color: blue;
-}
+/*SUCCESS*/
 .validation.success input,
-.validation.success select{
+.validation.success select,
+.validationAmount.success input{
     border-color: #2ecc71;
 }
-.validation.success i.fa-check-circle{
+.validation.success i.fa-check-circle,
+.validationAmount.success i.fa-check-circle{
     visibility: visible;
     color: #2ecc71;
 }
+/*ERROR*/
 .validation.error input,
-.validation.success select{
+.validation.error select,
+.validationAmount.error input{
     border-color: #e73c3c;
 }
-.validation.error i.fa-exclamation-circle{
+.validation.error i.fa-exclamation-circle,
+.validationAmount.error i.fa-exclamation-circle{
     visibility: visible;
     color: #e73c3c;
 }
-.validation.error small{
+.validation.error small,
+.validationAmount.error small{
     visibility: visible;
 }

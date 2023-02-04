@@ -20,7 +20,6 @@ form.addEventListener('submit', (e) => {
 function checkInputs(){
     if (!checkUserCard()){
         alert.style.display = "block";
-        console.log("Deberia aparecer alerta");
     }
     checkCardCvc();
     checkAmount();
@@ -62,7 +61,11 @@ function checkAmount(){
     const AMOUNT = amount.value;
 
     if (AMOUNT === ''){
-        setErrorFor(amount, 'Error');
+        var validation = document.getElementById('validationAmount');
+        var small = document.getElementsByTagName('small');
+
+        small.innerText = 'Error';
+        validation.className = 'validationAmount error';
     }
     else
         setSuccessFor(amount);
