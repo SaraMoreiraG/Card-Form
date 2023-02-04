@@ -6,6 +6,46 @@ body{
 .footer{
     background-color: whitesmoke;
 }
-.cards{
+/*.cards{
     background-color: lightgrey;
+}*/
+.form span{
+    color: red;
+}
+.input-group span{
+    color: black;
+}
+#submitError{
+    display: none;
+}
+/*form i{
+    visibility: hidden;
+    position: absolute;
+    margin-top: 5px;
+}*/
+form small{
+    visibility: hidden;
+    color: #e73c3c;
+}
+select{
+    border-color: blue;
+}
+.validation.success input,
+.validation.success select{
+    border-color: #2ecc71;
+}
+.validation.success i.fa-check-circle{
+    visibility: visible;
+    color: #2ecc71;
+}
+.validation.error input,
+.validation.success select{
+    border-color: #e73c3c;
+}
+.validation.error i.fa-exclamation-circle{
+    visibility: visible;
+    color: #e73c3c;
+}
+.validation.error small{
+    visibility: visible;
 }
