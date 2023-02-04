@@ -18,17 +18,17 @@ form.addEventListener('submit', (e) => {
 });
 
 function checkInputs(){
-    if (!checkUserCard()){
+    if (!checkUserCard() || !checkCardCvc() || !checkAmount() || !checkFirstName() || !checkLastName() 
+        || !checkCity() || !checkState() || !checkPostalCode() || !checkRadio()){
         alert.style.display = "block";
     }
-    checkCardCvc();
-    checkAmount();
-    checkFirstName();
-    checkLastName();
-    checkCity();
-    checkState();
-    checkPostalCode();
-    checkRadio();
+    
+    else{
+        alert.style.display = "block";
+        alert.innerText = "Your payment has been submitted";
+        alert.className = "alert alert-success"
+        form.reset();
+    }
 }
 
 function checkUserCard(){
@@ -39,9 +39,11 @@ function checkUserCard(){
     else if (!regex.test(USERCARDVALUE))
         setErrorFor(userCard, 'Only numbers allowed');
     else if (USERCARDVALUE.length != 16 )
-        setErrorFor(userCard, 'Wrong number');
-    else
+        setErrorFor(userCard, 'Your card should have 16 digits');
+    else{
         setSuccessFor(userCard);
+        return true;
+    }
 }
 
 function checkCardCvc(){
@@ -52,23 +54,23 @@ function checkCardCvc(){
     else if (!regex.test(CARDCVCVALUE))
         setErrorFor(cardCvc, 'Only numbers allowed');
     else if (CARDCVCVALUE.length != 4)
-        setErrorFor(cardCvc, 'Wrong number');
-    else
+        setErrorFor(cardCvc, 'Expected: 4 digits');
+    else{
         setSuccessFor(cardCvc);
+        return true;
+    }
 }
 
 function checkAmount(){
     const AMOUNT = amount.value;
+    var validation = document.getElementById('validationAmount');
 
-    if (AMOUNT === ''){
-        var validation = document.getElementById('validationAmount');
-        var small = document.getElementsByTagName('small');
-
-        small.innerText = 'Error';
+    if (AMOUNT === '')
         validation.className = 'validationAmount error';
+    else{
+        validation.className = 'validationAmount success';
+        return true;
     }
-    else
-        setSuccessFor(amount);
 }
 
 function checkFirstName(){
@@ -76,8 +78,10 @@ function checkFirstName(){
 
     if(FIRSTNAME === '')
         setErrorFor(firstName, 'Plese, introduce your name');
-    else
+    else{
         setSuccessFor(firstName);
+        return true;
+    }
 }
 
 function checkLastName(){
@@ -85,8 +89,10 @@ function checkLastName(){
     
     if(LASTNAME === '')
         setErrorFor(lastName, 'Please, introduce your last name');
-    else
+    else{
         setSuccessFor(lastName);
+        return true
+    }
 }
 
 function checkCity(){
@@ -94,8 +100,10 @@ function checkCity(){
 
     if(CITY === '')
         setErrorFor(city, 'Please, introduce your city');
-    else
+    else{
         setSuccessFor(city);
+        return true;
+    }
 }
 
 function checkState(){
@@ -103,8 +111,10 @@ function checkState(){
 
     if(STATE === '')
         setErrorFor(state, 'Select your State');
-    else
+    else{
         setSuccessFor(state);
+        return true;
+    }
 }
 
 function checkPostalCode(){
@@ -112,22 +122,28 @@ function checkPostalCode(){
 
     if(POSTALCODE === '')
         setErrorFor(postalCode, 'Introduce your Postal Code');
-    else
+    else{
         setSuccessFor(postalCode);
+        return true;
+    }
 }
 
 function checkRadio(){
     var radioValid = false;
+    var validation = document.getElementById('validationRadio');
 
     for (let i = 0; i < radio.length; i++)
     {
         if (radio[i].checked)
             radioValid = true;
     }
-    if (!radioValid)
-        console.log('Errorrr');
-    else
-        console.log('Bieeen');
+    if (!radioValid){
+        validation.className = 'validationRadio error';
+    }
+    else{
+        validation.className = 'validationRadio success';
+        return true;
+    }
 }
 
 function setErrorFor(input, message){
@@ -141,4 +157,8 @@ function setErrorFor(input, message){
 function setSuccessFor(input){
     var validation = input.parentElement;
     validation.className = 'validation success';
+}
+
+function refresh(){
+    document.location.reload();
 }

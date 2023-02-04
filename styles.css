@@ -9,10 +9,6 @@ body{
 #submitError{
     display: none;
 }
-/*.input-group span{
-    color: black;
-}*/
-
 form i.fas{
     visibility: hidden;
     position: absolute;
@@ -25,11 +21,18 @@ form small{
 /*SUCCESS*/
 .validation.success input,
 .validation.success select,
-.validationAmount.success input{
+.validationAmount.success input,
+.validationRadio.success .rectangle{
+    border-color: #2ecc71;
+}
+.validationRadio.success .rectangle{
+    border: 1px;
+    border-style: solid;
     border-color: #2ecc71;
 }
 .validation.success i.fa-check-circle,
-.validationAmount.success i.fa-check-circle{
+.validationAmount.success i.fa-check-circle,
+.validationRadio.success i.fa-check-circle{
     visibility: visible;
     color: #2ecc71;
 }
@@ -39,12 +42,19 @@ form small{
 .validationAmount.error input{
     border-color: #e73c3c;
 }
+.validationRadio.error .rectangle{
+    border: 1px;
+    border-style: solid;
+    border-color: #e73c3c;
+}
 .validation.error i.fa-exclamation-circle,
-.validationAmount.error i.fa-exclamation-circle{
+.validationAmount.error i.fa-exclamation-circle,
+.validationRadio.error i.fa-exclamation-circle{
     visibility: visible;
     color: #e73c3c;
 }
 .validation.error small,
-.validationAmount.error small{
+.validationAmount.error small,
+.validationRadio.error small{
     visibility: visible;
 }
