@@ -1,21 +1,18 @@
-# Boostrap Form [validate with JavaScript 
+# Boostrap Form - validated with JavaScript 
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/4GeeksAcademy/html-hello.git)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://saramoreirag-cardform-5n6vugog1mm.ws-eu86.gitpod.io/)
 
-El boilerplate más básico para cualquier estudiante de 4Geeks Academy utilizando el editor de código [gitpod.io](gitpod.io).
-
-[![How to open html/css preview of my project in gitpod]]
+Open the project with a few clicks in [gitpod.io](gitpod.io).
 
 ## ¿Qué hacer a continuación?
 
-Crea un archivo `index.html` con [la estructura básica de HTML](http://content.breatheco.de/lesson/what-is-html-learn-html#page-structure) y ve el resultado en vivo corriendo un servidor web utilizando el siguiente comando:
+Ve el resultado en vivo corriendo un servidor web utilizando el siguiente comando:
 
 ```sh
 $ pip3 install flask && python3 server.py
 ```
-
-- Puedes crear tantos archivos HTML cómo desees
-- También puedes crear archivos CSS e importarlos en tu página web utilizando una etiqueta `<link>` ubicándola entre las etiquetas `<head></head>`, de la siguiente manera:
+- descripcion 1
+- descripcion 2
 
 ```html
 <head>
