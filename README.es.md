@@ -1,11 +1,10 @@
-# Boostrap form validate with JavaScript 
+# Boostrap Form [validate with JavaScript 
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/4GeeksAcademy/html-hello.git)
 
 El boilerplate más básico para cualquier estudiante de 4Geeks Academy utilizando el editor de código [gitpod.io](gitpod.io).
 
-[![How to open html/css preview of my project in gitpod](https://github.com/4GeeksAcademy/Templates-Boilerplates/blob/master/assets/hello-html-intro.png?raw=true)](https://youtu.be/dfbDCMu_p-0)
-
+[![How to open html/css preview of my project in gitpod]
 ## ¿Qué hacer a continuación?
 
 Crea un archivo `index.html` con [la estructura básica de HTML](http://content.breatheco.de/lesson/what-is-html-learn-html#page-structure) y ve el resultado en vivo corriendo un servidor web utilizando el siguiente comando:
