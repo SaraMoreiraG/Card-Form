@@ -1,162 +1,124 @@
-var form = document.getElementById('form');
-var userCard = document.getElementById('userCard');
-var cardCvc = document.getElementById('cardCvc');
-var amount = document.getElementById('amount');
-var firstName = document.getElementById('firstName');
-var lastName = document.getElementById('lastName');
-var city = document.getElementById('city');
-var state = document.getElementById('state');
-var postalCode = document.getElementById('postalCode');
-var radio = document.getElementsByName('inlineRadioOptions');
-var alert = document.getElementById('submitError');
-const regex = /^[0-9]*$/;
+var divsValidation = document.getElementsByClassName('validation');
+
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    checkInputs();
+    var countCorrect = checkFormInputs();
+    countCorrect += checkState();
+    countCorrect += checkRadio();
+    checkAllBlanks(countCorrect);
 });
 
-function checkInputs(){
-    if (!checkUserCard() || !checkCardCvc() || !checkAmount() || !checkFirstName() || !checkLastName() 
-        || !checkCity() || !checkState() || !checkPostalCode() || !checkRadio()){
-        alert.style.display = "block";
+function checkFormInputs(){
+    var input = document.getElementsByTagName('input');
+    const regex = /^[0-9]*$/;
+    var count = 0;
+    for (let i = 0; i < 7; i++){
+        if (input[i].value == ''){
+            if (i == 6)
+                setErrorFor(input[i], 'Can not be blank', 7);
+            else
+                setErrorFor(input[i], 'Can not be blank', i);
+        }
+        else if (i < 3 && !regex.test(input[i].value))
+            setErrorFor(input[i], 'Only numbers allowed', i);
+        else if (i == 0 && input[i].value.length != 16)
+            setErrorFor(input[i], 'Your card should have 16 digits', i);
+        else if (i == 1 && input[i].value.length != 4)
+            setErrorFor(input[i], 'Expected: 4 digits', i);
+        else{
+            if (i == 6)
+                count += setSuccessFor(input[i], 7);
+            else
+                count += setSuccessFor(input[i], i);
+        }
     }
-    
-    else{
-        alert.style.display = "block";
-        alert.innerText = "Your payment has been submitted";
-        alert.className = "alert alert-success"
-        form.reset();
-    }
-}
-
-function checkUserCard(){
-    const USERCARDVALUE = userCard.value.trim();
-
-    if (USERCARDVALUE === '')
-        setErrorFor(userCard, 'Insert your card number');
-    else if (!regex.test(USERCARDVALUE))
-        setErrorFor(userCard, 'Only numbers allowed');
-    else if (USERCARDVALUE.length != 16 )
-        setErrorFor(userCard, 'Your card should have 16 digits');
-    else{
-        setSuccessFor(userCard);
-        return true;
-    }
-}
-
-function checkCardCvc(){
-    const CARDCVCVALUE = cardCvc.value.trim();
-
-    if (CARDCVCVALUE === '')
-        setErrorFor(cardCvc, 'CVC can not be blank');
-    else if (!regex.test(CARDCVCVALUE))
-        setErrorFor(cardCvc, 'Only numbers allowed');
-    else if (CARDCVCVALUE.length != 4)
-        setErrorFor(cardCvc, 'Expected: 4 digits');
-    else{
-        setSuccessFor(cardCvc);
-        return true;
-    }
-}
-
-function checkAmount(){
-    const AMOUNT = amount.value;
-    var validation = document.getElementById('validationAmount');
-
-    if (AMOUNT === '')
-        validation.className = 'validationAmount error';
-    else{
-        validation.className = 'validationAmount success';
-        return true;
-    }
-}
-
-function checkFirstName(){
-    const FIRSTNAME = firstName.value.trim();
-
-    if(FIRSTNAME === '')
-        setErrorFor(firstName, 'Plese, introduce your name');
-    else{
-        setSuccessFor(firstName);
-        return true;
-    }
-}
-
-function checkLastName(){
-    const LASTNAME = lastName.value.trim();
-    
-    if(LASTNAME === '')
-        setErrorFor(lastName, 'Please, introduce your last name');
-    else{
-        setSuccessFor(lastName);
-        return true
-    }
-}
-
-function checkCity(){
-    const CITY = city.value.trim();
-
-    if(CITY === '')
-        setErrorFor(city, 'Please, introduce your city');
-    else{
-        setSuccessFor(city);
-        return true;
-    }
+    return count;
 }
 
 function checkState(){
+    var state = document.getElementById('state');
     const STATE = state.value;
+    var count = 0;
 
     if(STATE === '')
-        setErrorFor(state, 'Select your State');
-    else{
-        setSuccessFor(state);
-        return true;
-    }
-}
+        setErrorFor(state, 'Select your State', 6);
+    else 
+        count += setSuccessFor(state, 6);
 
-function checkPostalCode(){
-    const POSTALCODE = postalCode.value.trim();
-
-    if(POSTALCODE === '')
-        setErrorFor(postalCode, 'Introduce your Postal Code');
-    else{
-        setSuccessFor(postalCode);
-        return true;
-    }
+    return count;
 }
 
 function checkRadio(){
+    var radio = document.getElementsByName('inlineRadioOptions');
     var radioValid = false;
-    var validation = document.getElementById('validationRadio');
-
+    var count = 0;
     for (let i = 0; i < radio.length; i++)
     {
         if (radio[i].checked)
             radioValid = true;
     }
-    if (!radioValid){
-        validation.className = 'validationRadio error';
+    if (!radioValid)
+        setErrorFor(radio, 'Select your card tipe', 8);
+    else
+        count += setSuccessFor(radio, 8);
+    return count;
+}
+
+function checkAllBlanks(countCorrect){
+    var divMainAlert = document.getElementById('formBody');
+    var mainAlert = document.createElement('div');
+    var alertClass = '';
+    var alertMessage = ''
+    if (countCorrect < 9){
+        if (!document.querySelectorAll("#formBody .alert").length > 0){
+            alertClass = 'alert alert-danger'
+            alertMessage = 'Some fields are missing';
+        }
     }
     else{
-        validation.className = 'validationRadio success';
-        return true;
+        if (document.querySelectorAll("#formBody .alert").length > 0){
+            mainAlert = document.querySelector("#formBody .alert");
+        }
+        alertClass = 'alert alert-success'
+        alertMessage = 'Your payment has been submitted';
     }
+    mainAlert.className = alertClass;
+    mainAlert.innerHTML = alertMessage;
+    divMainAlert.insertBefore(mainAlert, divMainAlert.firstChild);
 }
 
-function setErrorFor(input, message){
-    var validation = input.parentElement;
-    var small = validation.querySelector('small');
+function setErrorFor(input, message, index){
+    var validation = divsValidation[index];
 
-    small.innerText = message;
-    validation.className = 'validation error';
+    if(!validation.hasChildNodes()){
+        input.className = 'form-control border-danger';
+
+        var newI = document.createElement('i');
+        newI.className = 'fas fa-exclamation-circle text-danger d-block position-absolute mt-1';
+        validation.appendChild(newI);
+
+        var newSmall = document.createElement('small');
+        newSmall.className = 'text-danger d-block ms-4 mt-1';
+        validation.appendChild(newSmall);
+    }
+    validation.lastChild.innerHTML = message;
 }
 
-function setSuccessFor(input){
-    var validation = input.parentElement;
-    validation.className = 'validation success';
+function setSuccessFor(input, index){
+    var validation = divsValidation[index];
+    if(validation.hasChildNodes()){
+        while (validation.firstChild) {
+            validation.removeChild(validation.firstChild);
+        }
+    }
+
+    input.className = 'form-control border-success';
+    var newI = document.createElement('i');
+    newI.className = 'fas fa-check-circle text-success d-block position-absolute mt-1';
+    validation.appendChild(newI);
+    return (1);
 }
 
 function refresh(){
